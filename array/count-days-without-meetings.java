@@ -8,7 +8,7 @@ class Solution {
         while (!pq.isEmpty()) {
             int[] sub = pq.poll();
             ans += sub[0] > lastRight ? sub[0] - lastRight : 0;
-            lastRight = sub[1] + 1;
+            lastRight = Math.max(sub[1] + 1, lastRight);
         }
         return lastRight <= days ? ans + days - lastRight + 1 : ans;
     }
