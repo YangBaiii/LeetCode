@@ -6,7 +6,7 @@ class Solution {
         for (int key : map.keySet()) {
             int value = map.get(key);
             int groupSize = key + 1;
-            int group = Math.max(value / groupSize, 1);
+            int group = (key + value) / groupSize;
             ans += group * groupSize;
         }
         return ans;
