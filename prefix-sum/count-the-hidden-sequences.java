@@ -6,9 +6,9 @@ class Solution {
         if (cur > max) max = cur;
         if (cur < min) min = cur;
     }
-    int minStart = lower - min;
-    int maxStart = upper - max;
-    return maxStart >= minStart ? maxStart - minStart + 1 : 0;
+    long minStart = (long)lower - min;
+    long maxStart = (long)upper - max;
+    return maxStart >= minStart ? (int)(maxStart - minStart + 1) : 0;
   }
 //   x + min >= lower
 //   x + max <= upper
