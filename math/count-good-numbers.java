@@ -8,12 +8,16 @@ class Solution {
         return (int) (oddSum * evenSum % mod);
     }
 
+    // Divide and Conquer
     public long power(long base, long exp, int mod) {
          if(exp == 0) return 1;
         long temp = power(base, exp/2, mod);
+        // temp = pow(x, y/2)
         if((exp & 1) == 0) {
+            // y is even, x power y = pow(x, y/2) * pow(x, y/2)
             return (temp * temp) % mod;
         } else {
+            // y is odd, x power y = pow(x, y/2) * pow(x, y/2) * x
             return (temp * temp * base) % mod;
         }
     }
