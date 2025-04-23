@@ -13,11 +13,11 @@ class Solution {
          if(exp == 0) return 1;
         long temp = power(base, exp/2, mod);
         // temp = pow(x, y/2)
+        // If y is even, x power y = pow(x, y/2) * pow(x, y/2)
+        // If y is odd, x power y = pow(x, y/2) * pow(x, y/2) * x
         if((exp & 1) == 0) {
-            // y is even, x power y = pow(x, y/2) * pow(x, y/2)
             return (temp * temp) % mod;
         } else {
-            // y is odd, x power y = pow(x, y/2) * pow(x, y/2) * x
             return (temp * temp * base) % mod;
         }
     }
