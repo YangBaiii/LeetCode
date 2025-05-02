@@ -25,7 +25,7 @@ class Solution {
                 arr[i] = "R";
             } else arr[i] = ".";
         }
-        if (lastRight > 0) {
+        if (lastRight >= 0) {
             for (int i = lastRight; i < dominoes.length(); i++) {
                 arr[i] = "R";
             }
