@@ -1,39 +1,37 @@
 class Solution {
     public String pushDominoes(String dominoes) {
-        String[] arr = new String[dominoes.length()];
-        StringBuilder sb = new StringBuilder();
-        int lastRight = -1;
-        for (int i = 0; i < dominoes.length(); i++) {
-            char c = dominoes.charAt(i);
-            if (c == 'L') {
-                if (lastRight < 0) {
-                    for (int j = 0; j <= i; j++) arr[j] = "L"; 
-                } else {
-                    int sum = i + lastRight;
-                    int mid = sum % 2 == 0 ? sum / 2 : sum / 2 + 1;
-                    for (int j = lastRight; j < mid; j++) {
-                        arr[j] = "R";
+        char[] arr = dominoes.toCharArray();
+        int n = arr.length;
+        int lastLeft = -1, lastRight = -1;
+
+        for (int i = 0; i <= n; i++) {
+            char c = (i < n) ? arr[i] : 'R'; 
+            if (c == 'R') {
+                if (lastRight > lastLeft) {
+                    // Case: R...R — fill in all with 'R'
+                    for (int j = lastRight + 1; j < i; j++) {
+                        arr[j] = 'R';
                     }
-                    for (int j = mid; j <= i; j++) {
-                        arr[j] = "L";
-                    }
-                    if (sum % 2 == 0) arr[mid] = ".";
-                    lastRight = -1;
                 }
-            } else if (c == 'R') {
-                if (lastRight >= 0) {
-                    for (int j = lastRight; j < i; j++) arr[j] = "R";
-                }
-                arr[i] = "R"; 
                 lastRight = i;
-            } else arr[i] = ".";
-        }
-        if (lastRight >= 0) {
-            for (int i = lastRight; i < dominoes.length(); i++) {
-                arr[i] = "R";
+            } else if (c == 'L') {
+                if (lastLeft > lastRight || lastRight == -1) {
+                    // Case: L...L or ...L — fill in all with 'L'
+                    for (int j = lastLeft + 1; j < i; j++) {
+                        arr[j] = 'L';
+                    }
+                } else {
+                    // Case: R...L — fill in from both ends
+                    int lo = lastRight + 1, hi = i - 1;
+                    while (lo < hi) {
+                        arr[lo++] = 'R';
+                        arr[hi--] = 'L';
+                    }
+                    // If lo == hi, leave it as '.', balanced
+                }
+                lastLeft = i;
             }
         }
-        for (String s : arr) sb.append(s);
-        return sb.toString();
+        return new String(arr);
     }
 }
