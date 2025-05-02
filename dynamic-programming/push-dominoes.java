@@ -21,8 +21,11 @@ class Solution {
                     lastRight = -1;
                 }
             } else if (c == 'R') {
+                if (lastRight >= 0) {
+                    for (int j = lastRight; j < i; j++) arr[j] = "R";
+                }
+                arr[i] = "R"; 
                 lastRight = i;
-                arr[i] = "R";
             } else arr[i] = ".";
         }
         if (lastRight >= 0) {
