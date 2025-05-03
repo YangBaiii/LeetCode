@@ -1,24 +1,18 @@
 class Solution {
-    public int minDominoRotations(int[] tops, int[] bottoms) {
-        int ans1 = 0, ans2 = 0, target1 = tops[0], target2 = bottoms[0];
-        for (int i = 1; i < tops.length; i++) {
-            if (target1 > 0 && tops[i] != target1 && bottoms[i] == target1) {
-                ans1++;
-            } 
-            if (target2 > 0 && bottoms[i] != target2 && tops[i] == target2) {
-                ans2++;
-            }
-            if (tops[i] != target1 && bottoms[i] != target1) {
-                target1 = 0;
-                ans1 = 0;
-            }
-            if (tops[i] != target2 && bottoms[i] != target2) {
-                target2 = 0;
-                ans2 = 0;
-            }
-            if (target1 < 1 && target2 < 1) return -1;
+    public int minDominoRotations(int[] A, int[] B) {
+        int[] countA = new int[7], countB = new int[7], same = new int[7];
+        int n = A.length;
+        for (int i = 0; i < n; ++i) {
+            countA[A[i]]++;
+            countB[B[i]]++;
+            if (A[i] == B[i])
+                same[A[i]]++;
         }
-        if (Math.min(ans1, ans2) == 0) return Math.max(ans1, ans2);
-        else return Math.min(ans1, ans2);
-    }
+        // If we can make number i in a whole row,
+        // it should satisfy that countA[i] + countB[i] - same[i] = n
+        for (int i  = 1; i < 7; ++i)
+            if (countA[i] + countB[i] - same[i] == n)
+                return n - Math.max(countA[i], countB[i]);
+        return -1;
+     }
 }
