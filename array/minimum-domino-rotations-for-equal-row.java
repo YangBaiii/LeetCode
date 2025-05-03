@@ -18,6 +18,7 @@ class Solution {
             }
             if (target1 < 1 && target2 < 1) return -1;
         }
-        return Math.max(ans1, ans2);
+        if (Math.min(ans1, ans2) == 0) return Math.max(ans1, ans2);
+        else return Math.min(ans1, ans2);
     }
 }
