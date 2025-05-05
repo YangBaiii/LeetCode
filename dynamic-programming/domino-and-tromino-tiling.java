@@ -7,8 +7,8 @@ class Solution {
     // dp[n] - dp[n-1] = dp[n-1] + dp[n-3]
     // --> dp[n] = 2*dp[n-1] + dp[n-3]
     public int numTilings(int n) {
-        int[] dp = new int[1001];
-        int mod = 1000000007, ans = 0;
+        long[] dp = new long[1001];
+        int mod = 1000000007;
         dp[1] = 1;
         dp[2] = 2;
         dp[3] = 5;
@@ -16,6 +16,6 @@ class Solution {
             dp[i] = 2 * dp[i-1] + dp[i-3];
             dp[i] %= mod;
         }
-        return dp[n];
+        return (int)dp[n];
     }
 }
