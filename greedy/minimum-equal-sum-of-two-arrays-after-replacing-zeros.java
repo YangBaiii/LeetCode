@@ -21,7 +21,11 @@ class Solution {
                 }
             }
         }
-        if (diff + count1 > count2) return -1;
+        if (sum1 > sum2) {
+            if (count1 == 0 && diff < count2) return -1;
+        } else {
+            if (count2 == 0 && Math.abs(diff) < count1) return -1;
+        }
         return (long)(Math.max(sum1 + count1, sum2 + count2));
     }
 }
