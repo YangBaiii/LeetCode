@@ -21,6 +21,7 @@ class Solution {
                 }
             }
         }
+        if (diff == 0 && count1 == 0 && count2 == 0) return sum1;
         if (sum1 > sum2) {
             if (count2 == 0 || (count1 == 0 && diff < count2)) return -1;
         } else {
