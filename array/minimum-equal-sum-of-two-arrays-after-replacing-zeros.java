@@ -22,6 +22,6 @@ class Solution {
             }
         }
         if (diff + count1 > count2) return -1;
-        return (long)(Math.max(sum1, sum2) + Math.min(count1, count2));
+        return (long)(Math.max(sum1 + count1, sum2 + count2));
     }
 }
