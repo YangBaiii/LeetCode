@@ -1,41 +1,44 @@
 class Solution {
-    public List<String> getWordsInLongestSubsequence(String[] words, int[] groups) {
-        List<String> ans = new ArrayList<>();
-        int len = words.length;
-
-        for (int i = 0; i < len; i++) {
-            List<String> temp = new ArrayList<>();
-            Set<Integer> seen = new HashSet<>();
-            String str = words[i];
-            temp.add(str);
-            seen.add(groups[i]);
-
-            for (int j = i + 1; j < len; j++) {
-                if (groups[j] != groups[i] &&
-                    words[j].length() == str.length() &&
-                    diffByOne(str, words[j]) &&
-                    !seen.contains(groups[j])) {
-
-                    temp.add(words[j]);
-                    seen.add(groups[j]);
-                    str = words[j];
-                }
-            }
-
-            if (temp.size() > ans.size()) {
-                ans = temp;
-            }
-        }
-
-        return ans.isEmpty() ? List.of(words[0]) : ans;
+    public boolean differByOneChar(String word1, String word2) {
+        if (word1.length() != word2.length()) return false;
+        int diffCount = 0;
+        for (int i = 0; i < word1.length(); i++)
+            if (word1.charAt(i) != word2.charAt(i))
+                diffCount++;
+        return diffCount == 1;
     }
 
-    private boolean diffByOne(String a, String b) {
-        int diff = 0;
-        for (int i = 0; i < a.length(); i++) {
-            if (a.charAt(i) != b.charAt(i)) diff++;
-            if (diff > 1) return false;
+    public List<String> getWordsInLongestSubsequence(String[] words, int[] groups) {
+        int n = groups.length;
+        int[] dp = new int[n];
+        int[] parent = new int[n];
+        Arrays.fill(dp, 1);
+        Arrays.fill(parent, -1);
+        int maxi = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (groups[i] != groups[j] &&
+                    differByOneChar(words[i], words[j]) &&
+                    dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
+                    parent[i] = j;
+                }
+            }
+            if (dp[i] > maxi) maxi = dp[i];
         }
-        return diff == 1;
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (dp[i] == maxi) {
+                while (i != -1) {
+                    result.add(words[i]);
+                    i = parent[i];
+                }
+                break;
+            }
+        }
+        Collections.reverse(result);
+        return result;
     }
 }
