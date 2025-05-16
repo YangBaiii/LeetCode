@@ -3,8 +3,8 @@ class Solution {
         List<String> ans = new ArrayList<>();
         List<Integer> list = new LinkedList<>();
         int len = words.length;
-        int[] arr = new int[len];
         for (int i = 0; i < len; i++) {
+            int[] arr = new int[len];
             String str = words[i];
             list.add(groups[i]);
             for (int j = 0; j < str.length(); j++) {
