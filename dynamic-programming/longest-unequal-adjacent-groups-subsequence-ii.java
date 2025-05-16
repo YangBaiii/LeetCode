@@ -24,6 +24,7 @@ class Solution {
                 }
             }
             if (!ans.isEmpty()) return ans;
+            list.clear();
          }
          ans.add(words[0]);
          return ans;
