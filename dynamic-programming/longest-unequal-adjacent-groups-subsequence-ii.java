@@ -13,7 +13,7 @@ class Solution {
                     arr[k] = 2;
                     continue;
                 }
-                else if(words[k].charAt(j) != str.charAt(j)) arr[k]++; 
+                else if(j < words[k].length() && words[k].charAt(j) != str.charAt(j)) arr[k]++; 
              }
             }
             for (int g = i + 1; g < len; g++) {
