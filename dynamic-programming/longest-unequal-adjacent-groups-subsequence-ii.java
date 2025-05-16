@@ -1,32 +1,41 @@
 class Solution {
     public List<String> getWordsInLongestSubsequence(String[] words, int[] groups) {
         List<String> ans = new ArrayList<>();
-        List<Integer> list = new LinkedList<>();
         int len = words.length;
+
         for (int i = 0; i < len; i++) {
-            int[] arr = new int[len];
+            List<String> temp = new ArrayList<>();
+            Set<Integer> seen = new HashSet<>();
             String str = words[i];
-            list.add(groups[i]);
-            for (int j = 0; j < str.length(); j++) {
-                for (int k = i + 1; k < len; k++) {
-                if (groups[i] != groups[k] && str.length() != words[k].length()) {
-                    arr[k] = 2;
-                    continue;
-                }
-                else if(j < words[k].length() && words[k].charAt(j) != str.charAt(j)) arr[k]++; 
-             }
-            }
-            for (int g = i + 1; g < len; g++) {
-                if (!list.contains(groups[g]) && arr[g] == 1) {
-                    if (ans.isEmpty()) ans.add(str);
-                    ans.add(words[g]);
-                    list.add(groups[g]);
+            temp.add(str);
+            seen.add(groups[i]);
+
+            for (int j = i + 1; j < len; j++) {
+                if (groups[j] != groups[i] &&
+                    words[j].length() == str.length() &&
+                    diffByOne(str, words[j]) &&
+                    !seen.contains(groups[j])) {
+
+                    temp.add(words[j]);
+                    seen.add(groups[j]);
+                    str = words[j];
                 }
             }
-            if (!ans.isEmpty()) return ans;
-            list.clear();
-         }
-         ans.add(words[0]);
-         return ans;
+
+            if (temp.size() > ans.size()) {
+                ans = temp;
+            }
+        }
+
+        return ans.isEmpty() ? List.of(words[0]) : ans;
+    }
+
+    private boolean diffByOne(String a, String b) {
+        int diff = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) != b.charAt(i)) diff++;
+            if (diff > 1) return false;
+        }
+        return diff == 1;
     }
 }
