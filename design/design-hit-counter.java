@@ -1,24 +1,26 @@
 class HitCounter {
-    public Queue<Integer> queue = null;
+    // Follow Up
+    private Deque<int[]> queue;
+    private int totalHits;
+
     public HitCounter() {
         queue = new LinkedList<>();
+        totalHits = 0;
     }
-    
+
     public void hit(int timestamp) {
-        queue.offer(timestamp);
-    }
-    
-    public int getHits(int timestamp) {
-        while (!queue.isEmpty() && timestamp - queue.peek() >= 300) {
-            queue.poll();
+        if (!queue.isEmpty() && queue.peekLast()[0] == timestamp) {
+            queue.peekLast()[1]++;
+        } else {
+            queue.offer(new int[]{timestamp, 1});
         }
-        return queue.size();
+        totalHits++;
+    }
+
+    public int getHits(int timestamp) {
+        while (!queue.isEmpty() && timestamp - queue.peek()[0] >= 300) {
+            totalHits -= queue.poll()[1];
+        }
+        return totalHits;
     }
 }
-
-/**
- * Your HitCounter object will be instantiated and called as such:
- * HitCounter obj = new HitCounter();
- * obj.hit(timestamp);
- * int param_2 = obj.getHits(timestamp);
- */
