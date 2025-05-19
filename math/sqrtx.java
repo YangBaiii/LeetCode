@@ -4,13 +4,12 @@ class Solution {
         int left = 1, right = x;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (mid * mid > x) {
-                right = mid - 1;
-            } else {
+            if (mid <= x / mid) {
                 left = mid + 1;
-            } 
+            } else {
+                right = mid - 1;
+            }
         }
-        if(x / right >= right) return right;
-        return left;
+        return right;
     }
 }
