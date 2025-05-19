@@ -9,6 +9,9 @@ class Solution {
             } else if (mid > num / mid) {
                 right = mid - 1;
             } else return mid * mid == num;;
+            // mid == num / mid
+            // mid * mid <= num <= bound
+            // So no overflow prevention needed
         }
         return false;
     }
