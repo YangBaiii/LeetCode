@@ -8,7 +8,7 @@ class Solution {
                 left = mid + 1;
             } else if (mid > num / mid) {
                 right = mid - 1;
-            } else return true;
+            } else return mid * mid == num;;
         }
         return false;
     }
