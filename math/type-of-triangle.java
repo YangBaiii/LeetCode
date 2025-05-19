@@ -9,6 +9,6 @@ class Solution {
     }
 
     public boolean canFormTriangle(int a, int b, int c) {
-        return a * a + b * b > c && b * b + c * c > a * a && a * a + c * c > b * b;
+        return a + b > c && b + c > a && a + c > b;
     }
 }
