@@ -5,7 +5,7 @@ class Solution {
             arr[intervals[i][0]]++;
             arr[intervals[i][1]]--;
         }
-        for (int j = 1; j < 10001; j++) {
+        for (int j = 1; j < 1000001; j++) {
             arr[j] += arr[j-1];
             if (arr[j] > 1) return false;
         }
