@@ -10,10 +10,9 @@ class Solution {
             if (s.charAt(i) != '#') {
                 arr[index++] = s.charAt(i);
             } else {
-                index--;;
+                index = Math.max(0, index-1);
             }
         }
-        index = index >= 0 ? index : 0;
         return new String(Arrays.copyOfRange(arr, 0, index));
     }
 }
