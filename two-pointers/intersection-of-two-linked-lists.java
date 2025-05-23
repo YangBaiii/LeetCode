@@ -21,6 +21,7 @@ public class Solution {
             headB = headB.next;
             len2++;
         }
+        int n = 0;
         if (len1 > len2) {
             while (n < len1 - len2) {
                 head1 = head1.next;
@@ -33,7 +34,7 @@ public class Solution {
             }
         }
         while (head1 != null) {
-            if (head1.val == head2.val && head1.next == head2.next) return head1;
+            if (head1 == head2) return head1;
             head1 = head1.next;
             head2 = head2.next;
         }
