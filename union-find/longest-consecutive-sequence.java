@@ -8,9 +8,10 @@ class Solution {
                 int right = map.containsKey(i+1) ? map.get(i+1) : 0;
                 int v = left + right + 1;
                 ans = Math.max(ans, v);
+                map.put(i, v);
                 map.put(i-left, v);
                 map.put(i+right, v);
-            }
+            } 
         }
         return ans;
     }
