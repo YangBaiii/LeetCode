@@ -7,15 +7,13 @@ class Solution {
             int left = i + 1, right = nums.length - 1;
             while (left < right) {
                 int count = nums[i] + nums[left] + nums[right];
-                if (count == target) return count;
-                else if (count < target) left++;
-                else right--;
                 if (Math.abs(count - target) < diff) {
                     ans = count;
                     diff = Math.abs(count - target);
-                    left++;
-                    right--;
                 } 
+                if (count == target) return count;
+                else if (count < target) left++;
+                else right--;
             }
         }
         return ans;
