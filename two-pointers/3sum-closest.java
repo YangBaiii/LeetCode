@@ -7,6 +7,7 @@ class Solution {
             int left = i + 1, right = nums.length - 1;
             while (left < right) {
                 int count = nums[i] + nums[left] + nums[right];
+                ans = ans == 0 ? count : ans;
                 if (Math.abs(count - target) < diff) {
                     ans = count;
                     diff = Math.abs(count - target);
