@@ -5,7 +5,7 @@ class Solution {
         boolean[] boxFound = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
         for (int i : initialBoxes) {
-            if (status[i] == 1) queue.add(i);
+            queue.add(i);
             boxFound[i] = true;
         }
         while (!queue.isEmpty()) {
@@ -13,14 +13,14 @@ class Solution {
             if (status[cur] == 1 && !usedBoxes[cur]) {
                 ans += candies[cur];
                 usedBoxes[cur] = true;
-            }
-            for (int i : keys[cur]) {
-                status[i] = 1;
-                if (boxFound[i]) queue.add(i);
-            }
-            for (int i : containedBoxes[cur]) {
-                boxFound[i] = true;
-                queue.add(i);
+                for (int i : keys[cur]) {
+                    status[i] = 1;
+                    if (boxFound[i]) queue.add(i);
+                }
+                for (int i : containedBoxes[cur]) {
+                    boxFound[i] = true;
+                    queue.add(i);
+                }
             }
         }
         return ans;
