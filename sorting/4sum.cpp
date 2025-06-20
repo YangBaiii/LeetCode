@@ -11,8 +11,8 @@ public:
                 if (j > i + 1 && nums[j] == nums[j-1]) continue;
                 int left = j + 1, right = nums.size() - 1, cur = nums[i] + nums[j];
                 while (right > left) {
-                    if (cur + nums[left] + nums[right] > target) right--;
-                    else if (cur + nums[left] + nums[right] < target) left++;
+                    if ((long) cur + nums[left] + nums[right] > target) right--;
+                    else if ((long) cur + nums[left] + nums[right] < target) left++;
                     else {
                         ans.push_back(vector<int>{nums[i], nums[j], nums[left], nums[right]});
                         while (left < right && nums[right] == nums[right-1]) right--;
