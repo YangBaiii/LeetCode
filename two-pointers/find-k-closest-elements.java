@@ -4,7 +4,7 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
         while (left < right) {
             int mid = left + (right - left) / 2;
-            if ((arr[mid] + arr[mid+k]) / 2 < x) left = mid + 1; 
+            if (arr[mid] + arr[mid+k] < 2 * x) left = mid + 1; 
             else right = mid; 
         }
         for (int i = left; i < left + k; i++) ans.add(arr[i]);
