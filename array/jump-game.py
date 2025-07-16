@@ -1,7 +1,7 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        dis = 0
-        
+        dis = 1
+
         for i in range(len(nums)):
             if i > dis:
                 return False
