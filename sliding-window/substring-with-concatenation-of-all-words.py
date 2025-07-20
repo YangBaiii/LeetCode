@@ -4,7 +4,7 @@ class Solution:
         perm = permutations(words)
         for p in perm:
             c = ''.join(p[:])
-            if s.find(c) >= 0:
+            if s.find(c) >= 0 and s.find(c) not in ans:
                 ans.append(s.find(c))
         
         return ans
