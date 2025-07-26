@@ -3,6 +3,9 @@ class Solution:
         words = s.split()
         mapping = {}
 
+        if len(words) != len(pattern):
+            return False
+        
         for dx, dy in zip(pattern, words):
             if dx in mapping:
                 if mapping[dx] != dy:
