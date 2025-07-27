@@ -14,6 +14,6 @@ class Solution:
             if not n1 or not n2:
                 return False
 
-            return n1.val == n2.val and isMirror(n1.left, n2.right) and isMirror(n1.left, n2.right)
+            return n1.val == n2.val and isMirror(n1.left, n2.right) and isMirror(n1.right, n2.left)
             
         return isMirror(root.left, root.right)
