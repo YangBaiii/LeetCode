@@ -1,8 +1,9 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
-        ans, temp = 1, n
-        while abs(temp) > 0:
-                ans *= x 
-                temp = temp - 1 if n > 0 else temp + 1
+        def fastPow(x, n):
+            if n == 0:
+                return 1
+            half = fastPow(x,n//2)
+            return half * half if n % 2 == 0 else half * half * x
 
-        return ans if n > 0 else 1 / ans
+        return fastPow(x,n) if n >= 0 else 1 / fastPow(x,-n)
