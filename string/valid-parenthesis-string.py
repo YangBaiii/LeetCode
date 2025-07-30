@@ -1,18 +1,21 @@
 class Solution:
     def checkValidString(self, s: str) -> bool:
-        stack = []
-        count = 0
+        # Least and max number of ( 
+        cmin = cmax = 0
 
         for i in s:
             if i == '(':
-                stack.append(i)
-            elif i == '*':
-                count += 1
+                cmin += 1
+                cmax += 1
+            elif i == ')':
+                cmin -= 1
+                cmax -= 1
             else:
-                if not stack:
-                    if count == 0:
-                        return False
-                    else: count -= 1
-                else: stack.pop()
-
-        return count >= len(stack)
+                cmin -= 1
+                cmax += 1
+            if cmax < 0:
+                return False
+            
+            cmin = max(0, cmin)
+        
+        return cmin == 0
