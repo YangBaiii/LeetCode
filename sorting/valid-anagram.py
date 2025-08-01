@@ -6,8 +6,10 @@ class Solution:
             s_map[i] += 1
         
         for j in t:
-            if j not in s_map or s_map[j] == 0:
+            if j not in s_map:
                 return False
             s_map[j] -= 1
+            if s_map[j] == 0:
+                s_map.pop(j)
         
-        return True
+        return len(s_map) == 0
