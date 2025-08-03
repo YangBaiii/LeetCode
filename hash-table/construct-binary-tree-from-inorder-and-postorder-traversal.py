@@ -7,15 +7,20 @@
 
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        if not inorder or not postorder:
-            return None
+        inorder_index = {val: i for i, val in enumerate(inorder)}
 
-        root_val = postorder.pop()
-        root = TreeNode(root_val)
+         def helper(in_left, in_right):
+            if in_left > in_right:
+                return None
 
-        index = inorder.index(root_val)
+            root_val = postorder.pop()  
+            root = TreeNode(root_val)
 
-        root.right = self.buildTree(inorder[index + 1:], postorder)
-        root.left = self.buildTree(inorder[:index], postorder)
+            index = inorder_index[root_val]  
+            
+            root.right = helper(index + 1, in_right)
+            root.left = helper(in_left, index - 1)
 
-        return root
+            return root
+        
+        return helper(0, len(inorder) - 1)
