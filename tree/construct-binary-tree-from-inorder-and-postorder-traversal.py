@@ -9,7 +9,7 @@ class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         inorder_index = {val: i for i, val in enumerate(inorder)}
 
-         def helper(in_left, in_right):
+        def helper(in_left, in_right):
             if in_left > in_right:
                 return None
 
