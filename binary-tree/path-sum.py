@@ -10,15 +10,12 @@ class Solution:
             return False
 
         def dfs(target, node):
-            if not node or node.val > target:
+            if not node:
                 return False
-            elif node.val == target:
-                return True
-            
-            newTarget = target - node.val
-            if newTarget == 0:
-                return True
+                
+            if not node.left and not node.right:
+                return target == node.val
 
-            return dfs(newTarget, node.left) or dfs(newTarget, node.right)
+            return dfs(target - node.val, node.left) or dfs(target - node.val, node.right)
         
         return dfs(targetSum, root)
