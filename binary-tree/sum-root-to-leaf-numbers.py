@@ -6,19 +6,15 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        
         def sumTree(node, val):
             if not node:
-                return val
+                return 0
 
             val = node.val + val * 10
 
             if not node.left and not node.right:
                 return val
-                
-            left = sumTree(node.left, val)
-            right = sumTree(node.right, val)
 
-            return left + right
+            return sumTree(node.left, val) + sumTree(node.right, val)
         
         return sumTree(root, 0)
