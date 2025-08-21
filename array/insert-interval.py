@@ -1,27 +1,19 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        intervals.sort(key=lambda x: x[0])
+        n = len(intervals)
+        res = []
 
-        start, l, r = newInterval[0], 0, len(intervals) - 1  
+        i = 0
+        while i < n and intervals[i][1] < newInterval[0]:
+            res.append(intervals[i])
+            i += 1
 
-        while l <= r:
-            mid = l + (r - l) // 2
-            if intervals[mid][0] < start:
-                l = mid + 1
-            elif intervals[mid][0] > start:
-                r = mid - 1
-            else:  
-                l = mid
-                break
-        index = l
-        if index > 0:
-            start = min(start, intervals[index - 1][0]) if newInterval[0] <= intervals[index - 1][1] else start
-            index -= 1 if newInterval[0] <= intervals[index][1] else 0
+        while i < n and intervals[i][0] <= newInterval[1]:
+            newInterval[0] = min(newInterval[0], intervals[i][0])
+            newInterval[1] = max(newInterval[1], intervals[i][1])
+            i += 1
 
-        end = newInterval[1]
-        while index < len(intervals) and intervals[index][0] <= end:
-            end = max(end, intervals[index][1])
-            intervals.pop(index)
+        res.append(newInterval)
+        res.extend(intervals[i:])
 
-        intervals.insert(index, [start, end])
-        return intervals
+        return res
