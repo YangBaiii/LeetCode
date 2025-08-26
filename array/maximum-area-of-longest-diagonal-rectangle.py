@@ -10,5 +10,6 @@ class Solution:
                 ans = area
             elif dig == cur:
                 area = max(area, l[0] * l[1])
+                ans = area
         
         return ans
