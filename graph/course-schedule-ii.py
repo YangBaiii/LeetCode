@@ -21,5 +21,7 @@ class Solution:
                 if indegree[nxt] == 0:
                     queue.append(nxt)
         
-        return ans
-            
+        if len(ans) == n:
+            return ans
+        else:
+            return []            
