@@ -9,7 +9,7 @@ class Solution:
         while r < len(t):
             if t[r] == s[l]:
                 l += 1
-                if l == len(s) - 1:
+                if l == len(s):
                     return True
             r += 1
         
